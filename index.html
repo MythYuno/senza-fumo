@@ -153,6 +153,21 @@
         @keyframes panel-in { from { opacity: .5; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         .award-flash { animation: award-flash .7s ease-out; }
         @keyframes award-flash { 0% { box-shadow: 0 0 0 0 rgba(0,255,102,.7); } 100% { box-shadow: 0 0 0 14px rgba(0,255,102,0); } }
+        .vault-boy-container svg #character { transform-box: fill-box; transform-origin: 50% 90%; animation: vault-idle 3.2s ease-in-out infinite; }
+        .vault-boy-container svg #thumb-arm { transform-box: fill-box; transform-origin: 15% 90%; animation: thumb-bob 2.6s ease-in-out infinite; }
+        .vault-boy-container svg #eyes { transform-box: fill-box; transform-origin: center; animation: vault-blink 4.2s infinite; }
+        .vault-boy-container svg #lungs { transform-box: fill-box; transform-origin: center; animation: lungs-glow 2.8s ease-in-out infinite; }
+        .vault-boy-container { cursor: pointer; transition: filter .2s, transform .2s; }
+        .vault-boy-container:hover { filter: brightness(1.2) drop-shadow(0 0 8px rgba(0,255,102,.3)); transform: translateY(-2px); }
+        .vault-boy-container.is-cheering svg #character { animation: vault-cheer .58s ease-in-out 2; }
+        .vault-boy-container.is-cheering svg #thumb-arm { animation: thumb-cheer .42s ease-in-out 3; }
+        .vault-boy-container:focus-visible { outline: 2px dashed var(--pip-green); outline-offset: 5px; }
+        @keyframes vault-idle { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-1deg); } }
+        @keyframes thumb-bob { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-4deg); } }
+        @keyframes vault-blink { 0%,45%,48%,82%,85%,100% { transform: scaleY(1); } 46.5%,83.5% { transform: scaleY(.12); } }
+        @keyframes lungs-glow { 0%,100% { opacity: .35; transform: scale(.96); } 50% { opacity: .85; transform: scale(1.04); } }
+        @keyframes vault-cheer { 0%,100% { transform: translateY(0) rotate(0); } 45% { transform: translateY(-9px) rotate(-3deg); } }
+        @keyframes thumb-cheer { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-15deg) translateY(-4px); } }
         @media (max-width: 520px) {
             body { align-items: flex-start; }
             .crt-container { border-width: 7px; border-radius: 18px; padding: 12px !important; }
@@ -225,30 +240,42 @@
                     
                     <!-- Vault Boy Graphics Display -->
                     <div class="md:col-span-5 flex flex-col items-center justify-center border-2 border-emerald-500/60 p-4 rounded-lg bg-emerald-950/20 pip-glow-box">
-                        <div class="vault-boy-container w-48 h-48 sm:w-56 sm:h-56 relative flex items-center justify-center">
+                        <div class="vault-boy-container w-48 h-48 sm:w-56 sm:h-56 relative flex items-center justify-center" id="vault-boy" role="button" tabindex="0" aria-label="Clicca per un messaggio motivazionale">
                             <!-- SVG Retro Vault Boy Simulation -->
-                            <svg viewBox="0 0 200 200" class="w-full h-full stroke-emerald-400 fill-none" stroke-width="2">
-                                <!-- Vault Boy Head -->
-                                <circle cx="100" cy="70" r="35" stroke="currentColor" fill="#051108" />
-                                <!-- Hair -->
-                                <path d="M 70 65 Q 85 40 115 50 Q 130 55 135 70" stroke="currentColor" fill="none" stroke-width="3" />
-                                <!-- Eyes & Smile -->
-                                <circle cx="88" cy="68" r="3" fill="currentColor" />
-                                <circle cx="112" cy="68" r="3" fill="currentColor" />
-                                <path d="M 88 82 Q 100 95 112 82" stroke="currentColor" fill="none" stroke-width="2.5" />
-                                <!-- Body -->
-                                <path d="M 70 105 L 130 105 L 120 160 L 80 160 Z" stroke="currentColor" fill="#051108" />
-                                <!-- Thumbs Up Arm -->
-                                <path d="M 130 110 L 155 100 L 160 85" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
-                                <path d="M 160 82 L 160 70 L 165 70 L 165 85" stroke="currentColor" stroke-width="3" />
-                                <!-- Healthy Lungs Outline inside chest -->
-                                <path d="M 90 120 Q 80 125 82 140 Q 95 145 95 125 Z" fill="currentColor" class="animate-pulse" opacity="0.6"/>
-                                <path d="M 110 120 Q 120 125 118 140 Q 105 145 105 125 Z" fill="currentColor" class="animate-pulse" opacity="0.6"/>
+                            <svg viewBox="0 0 200 200" class="w-full h-full stroke-emerald-400 fill-none" stroke-width="2" role="img" aria-label="Omino Pip-Boy che fa il pollice in su">
+                                <defs><radialGradient id="boyHalo"><stop stop-color="#00ff66" stop-opacity=".2"/><stop offset="1" stop-color="#00ff66" stop-opacity="0"/></radialGradient></defs>
+                                <ellipse cx="100" cy="103" rx="78" ry="82" fill="url(#boyHalo)" stroke="none"/>
+                                <g id="character" stroke-linecap="round" stroke-linejoin="round">
+                                    <!-- Tuta e colletto -->
+                                    <path d="M62 112 Q64 101 78 99 L91 96 H109 L122 99 Q136 101 138 112 L145 161 Q146 168 137 169 H63 Q54 168 55 161Z" fill="#082512" stroke="currentColor" stroke-width="3"/>
+                                    <path d="M83 99 100 115 117 99M91 111l9 11 9-11" stroke="#7bff9f" stroke-width="2"/>
+                                    <path d="M68 122 82 128M132 122l-14 6M73 157h54" stroke="#20d66b" stroke-width="1.5" opacity=".8"/>
+                                    <rect x="88" y="131" width="24" height="22" rx="2" fill="#031108" stroke="#74ff96" stroke-width="1.5"/>
+                                    <text x="100" y="146" text-anchor="middle" fill="#8affaa" stroke="none" font-size="12" font-family="monospace" font-weight="bold">76</text>
+                                    <!-- Braccio e pollice alzato -->
+                                    <g id="thumb-arm" stroke="#72ff98" stroke-width="5">
+                                        <path d="M133 113 151 105 158 88"/>
+                                        <path d="M153 87 155 72 Q156 67 160 69 L164 72 166 86 Q167 91 162 95 L158 99" fill="#092313" stroke-width="3"/>
+                                        <path d="M152 101 161 96" stroke-width="3"/>
+                                    </g>
+                                    <!-- Volto e ciuffo -->
+                                    <path d="M68 66 Q68 38 100 37 Q133 38 132 68 L129 81 Q124 101 100 103 Q76 101 71 81Z" fill="#061a0c" stroke="currentColor" stroke-width="3"/>
+                                    <path d="M69 64 Q69 43 87 38 Q83 53 101 48 Q118 44 128 52 Q134 57 133 68 Q124 59 115 59 Q102 60 92 55 Q83 68 69 70Z" fill="#0c3219" stroke="#72ff98" stroke-width="2.5"/>
+                                    <path d="M82 73q7-5 14 0M104 73q7-5 14 0" stroke="#72ff98" stroke-width="2"/>
+                                    <g id="eyes" fill="#8affaa" stroke="none"><ellipse cx="89" cy="79" rx="3.2" ry="4.4"/><ellipse cx="111" cy="79" rx="3.2" ry="4.4"/></g>
+                                    <path d="M96 83q-2 6 2 7" stroke="#49dc72" stroke-width="1.5"/>
+                                    <path d="M87 91 Q100 101 113 91 Q108 88 100 92 Q92 88 87 91Z" fill="#53e87c" stroke="#72ff98" stroke-width="1.5"/>
+                                    <path d="M74 83q-3 2-5-1M126 83q3 2 5-1" stroke="#72ff98" stroke-width="1.5"/>
+                                    <!-- Polmoni stilizzati pulsanti -->
+                                    <g id="lungs" fill="#33e96e" stroke="#8affaa" stroke-width="1.5">
+                                        <path d="M96 128q-7-12-11 0l-3 12q6 5 13 0z"/><path d="M104 128q7-12 11 0l3 12q-6 5-13 0z"/>
+                                    </g>
+                                </g>
                             </svg>
                         </div>
                         <div class="mt-2 text-center">
                             <span class="bg-emerald-500 text-black text-xs font-bold px-2 py-0.5 rounded">CONDIZIONE: OTTIMALE</span>
-                            <p class="text-xs mt-1 text-emerald-400/80">POLMONI IN RIGENERAZIONE</p>
+                            <p id="vault-boy-quip" aria-live="polite" class="text-xs mt-1 text-emerald-400/80">POLMONI IN RIGENERAZIONE</p>
                         </div>
                     </div>
 
@@ -560,8 +587,38 @@
             userData.cravingsResisted = (userData.cravingsResisted || 0) + 1;
             saveUserData();
             playRetroSound('reward');
+            celebrateVaultBoy();
             updateTimers();
         }
+
+        const vaultBoyQuips = [
+            'BELLA MOSSA, SOPRAVVISSUTO.', 'UN ALTRO CRAVING RESPINTO. IL VAULT APPROVA.',
+            'I TAPPI RESTANO TUOI. LA SIGARETTA NO.', 'PUNTO PER TE. ZERO PER LA NICOTINA.',
+            'MISSIONE COMPLETATA: HAI SCELTO TU.', 'IL TUO FUTURO TI DEVE UN HIGH FIVE.',
+            'LA TENTAZIONE HA PERSO CONTATTO COL COMANDO.', 'UN PASSO ALLA VOLTA. NIENTE FUMO, PIÙ BOTTINO.',
+            'OTTIMA STRATEGIA. IO AVREI FATTO UGUALE.', 'LA ZONA È TOSTA. TU, A QUANTO PARE, DI PIÙ.',
+            'RESPIRA. IL PIP-BOY È ORGOGLIOSO. UN PO’.', 'CRAVING VINTI: +1. SCUSE: ANCORA ZERO.'
+        ];
+        let vaultBoyQuipIndex = 0;
+        function celebrateVaultBoy() {
+            const mascot = document.getElementById('vault-boy');
+            mascot.classList.remove('is-cheering');
+            void mascot.offsetWidth;
+            mascot.classList.add('is-cheering');
+            document.getElementById('vault-boy-quip').textContent = vaultBoyQuips[vaultBoyQuipIndex++ % vaultBoyQuips.length];
+            window.setTimeout(() => mascot.classList.remove('is-cheering'), 1300);
+        }
+        const vaultBoy = document.getElementById('vault-boy');
+        vaultBoy.addEventListener('click', () => {
+            celebrateVaultBoy();
+            playRetroSound('beep');
+        });
+        vaultBoy.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                vaultBoy.click();
+            }
+        });
 
         // Health Milestones Data & Logic
         const milestones = [
@@ -581,7 +638,7 @@
             const start = new Date(userData.quitDate);
             const hoursPassed = Math.max(0, (now - start) / (1000 * 3600));
 
-            milestones.forEach(m => {
+            [...milestones].sort((a, b) => a.durationHours - b.durationHours).forEach(m => {
                 let pct = Math.min(100, Math.floor((hoursPassed / m.durationHours) * 100));
                 if (isNaN(pct)) pct = 0;
 
@@ -608,11 +665,19 @@
 
         // Savings & Loot Unlocked
         const lootTable = [
-            { name: "Nuka-Cola (Caffè / Snack Premium)", cost: 3.50, icon: "fa-bottle-droplet" },
-            { name: "Rivista Fumetto Grognak (Libro / Manga)", cost: 15.00, icon: "fa-book-open" },
-            { name: "Fucile Laser (Abbonamento Palestra / Gioco)", cost: 60.00, icon: "fa-gamepad" },
-            { name: "Armatura Potenziata T-45 (Giacca di Marca)", cost: 180.00, icon: "fa-shield-cat" },
-            { name: "Vacanze nel Vault 76 (Weekend Fuori Porta)", cost: 500.00, icon: "fa-plane-departure" }
+            { name: "Nuka-Cola (caffè o snack)", cost: 3.50, icon: "fa-bottle-water" },
+            { name: "Rivista di Grognak (libro o manga)", cost: 10.00, icon: "fa-book-open" },
+            { name: "Kit da esploratore (piccolo sfizio)", cost: 20.00, icon: "fa-compass" },
+            { name: "Lunch box del Vault (pranzo fuori)", cost: 35.00, icon: "fa-utensils" },
+            { name: "Controller da sopravvissuto", cost: 60.00, icon: "fa-gamepad" },
+            { name: "Biglietto per il cinema atomico", cost: 85.00, icon: "fa-ticket" },
+            { name: "Zaino da esploratore", cost: 120.00, icon: "fa-suitcase" },
+            { name: "Armatura leggera T-45", cost: 180.00, icon: "fa-shield-halved" },
+            { name: "Giornata alle terme del Vault", cost: 250.00, icon: "fa-hot-tub-person" },
+            { name: "Gear da avventuriero", cost: 350.00, icon: "fa-person-hiking" },
+            { name: "Weekend fuori dal Vault", cost: 500.00, icon: "fa-plane" },
+            { name: "Equipaggiamento da leggenda", cost: 750.00, icon: "fa-medal" },
+            { name: "La tua missione speciale", cost: 1000.00, icon: "fa-star" }
         ];
 
         let previousLootUnlocked = null;
@@ -660,10 +725,19 @@
         // Perks List
         const perksData = [
             { title: "POLMONI D'ACCIAIO", icon: "fa-lungs", reqDays: 1, desc: "+20 Resistenze ai fumi tossici. Il tuo respiro torna pulito e profondo." },
-            { title: "COLLEZIONISTA DI TAPPI", icon: "fa-coins", reqDays: 7, desc: "Hai accumulato una riserva notevole di tappi da reinvestire nel tuo futuro." },
             { title: "ALITO FRESCO V.T.", icon: "fa-sparkles", reqDays: 3, desc: "+2 Aumento Carisma nelle conversazioni da vicino con altri sopravvissuti." },
+            { title: "COLLEZIONISTA DI TAPPI", icon: "fa-coins", reqDays: 7, desc: "Hai accumulato una riserva notevole di tappi da reinvestire nel tuo futuro." },
             { title: "RAD-FREE", icon: "fa-biohazard", reqDays: 14, desc: "Livelli di tossine e catrame nel sangue crollati del 90%." },
-            { title: "AMABILE PARLATORE", icon: "fa-comments", reqDays: 30, desc: "I tuoi livelli di ansia si sono stabilizzati senza bisogno della dose nicotinica." }
+            { title: "AMABILE PARLATORE", icon: "fa-comments", reqDays: 30, desc: "I tuoi livelli di ansia si sono stabilizzati senza bisogno della dose nicotinica." },
+            { title: "SCAVENGER DI LUSSO", icon: "fa-magnifying-glass", reqDays: 2, desc: "Hai trovato una nuova routine. Il vecchio bottino non ti serve più." },
+            { title: "MANI DA MECCANICO", icon: "fa-screwdriver-wrench", reqDays: 5, desc: "Hai superato la prima settimana senza chiedere una pausa al vecchio vizio." },
+            { title: "SENSI IN ALLERTA", icon: "fa-eye", reqDays: 10, desc: "Riconosci la tentazione prima che scelga lei al posto tuo." },
+            { title: "CARTOGRAFO DEL VAULT", icon: "fa-map", reqDays: 21, desc: "Tre settimane di percorso: ormai conosci la strada." },
+            { title: "FORTUNA DEL SOPRAVVISSUTO", icon: "fa-leaf", reqDays: 45, desc: "La costanza sta diventando la tua nuova fortuna." },
+            { title: "GUARDIANO DEL TESORO", icon: "fa-lock", reqDays: 60, desc: "Due mesi a proteggere i tuoi tappi e le tue scelte." },
+            { title: "LEGENDA DELLA ZONA", icon: "fa-crown", reqDays: 90, desc: "Novanta giorni: titolo guadagnato sul campo." },
+            { title: "VETERANO DEL VAULT", icon: "fa-star", reqDays: 180, desc: "Mezzo anno di nuove abitudini. Il Pip-Boy ti deve un inchino." },
+            { title: "MAESTRO DELLA PROPRIA ROTTA", icon: "fa-flag-checkered", reqDays: 365, desc: "Un anno di scelte tue. Il prossimo capitolo lo decidi tu." }
         ];
 
         function updatePerks() {
@@ -673,8 +747,16 @@
             const now = new Date();
             const start = new Date(userData.quitDate);
             const daysPassed = Math.max(0, (now - start) / (1000 * 3600 * 24));
+            const unlockedCount = perksData.filter(perk => daysPassed >= perk.reqDays).length;
+            if (previousPerksUnlocked !== null && unlockedCount > previousPerksUnlocked) {
+                playRetroSound('reward');
+                document.getElementById('content-perks').classList.add('award-flash');
+                celebrateVaultBoy();
+                window.setTimeout(() => document.getElementById('content-perks').classList.remove('award-flash'), 800);
+            }
+            previousPerksUnlocked = unlockedCount;
 
-            perksData.forEach(perk => {
+            [...perksData].sort((a, b) => a.reqDays - b.reqDays).forEach(perk => {
                 const unlocked = daysPassed >= perk.reqDays;
 
                 const card = document.createElement('div');
