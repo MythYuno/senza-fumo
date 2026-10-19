@@ -1,137 +1,662 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#020503"><title>Risparmio</title>
-<style>
-:root{--bg:#020503;--paper:#050906;--ink:#d8e2da;--muted:#929d94;--line:#19231c;--green:#20d66b;--mint:#07170d;--radius:22px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;letter-spacing:-.02em;min-height:100vh}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(0deg,transparent 0px,transparent 3px,rgba(80,255,130,.018) 4px);opacity:.38}.wrap{width:min(1040px,100% - 36px);margin:22px auto;padding:24px 30px 30px;position:relative;border:1px solid #1a4a2b;border-radius:24px;box-shadow:inset 0 0 35px #06200e55,0 0 24px #0c281233;background:linear-gradient(135deg,#030805 0%,#020503 45%,#030805 100%)}.top{display:flex;align-items:center;justify-content:flex-end;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #183d24}.brand{font-size:14px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}.brand span{display:inline-grid;place-items:center;color:var(--green);width:25px;height:25px;border:1px solid #31513a;border-radius:50%;margin-right:7px}.settings{border:1px solid #285633;background:#06100a;border-radius:3px;padding:7px 12px;color:var(--green);font:inherit;cursor:pointer;text-transform:uppercase;font-size:10px;letter-spacing:.08em;text-shadow:0 0 8px #20d66b44}.settings:hover,.save:hover{box-shadow:0 0 18px #20d66b22}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px}.eyebrow{color:var(--green);font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.12em}.money-journey{display:grid;grid-template-columns:1fr 1fr;align-items:center;column-gap:28px;padding:18px 0 20px;border:0;border-block:1px solid #1b4529;border-radius:0;background:transparent;position:relative}.money-journey:before{content:"";position:absolute;top:-1px;left:0;width:54px;height:2px;background:var(--green);box-shadow:0 0 9px var(--green)}.journey-head{grid-column:1;display:flex;justify-content:space-between;align-items:center;gap:15px}.journey-head h1{font-size:clamp(20px,3vw,27px);color:var(--ink);margin:6px 0 0;letter-spacing:-.05em}.money-total{font:700 clamp(36px,5.5vw,54px)/1 ui-monospace,Consolas,monospace;letter-spacing:-.06em;color:var(--green);text-shadow:0 0 12px #20d66b44;white-space:nowrap}.goal-line{grid-column:1;display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:10px;margin:17px 0 7px}.goal-line span:last-child{color:var(--green)}.track{grid-column:1;height:4px;background:#142018;border-radius:0;overflow:hidden}.track-fill{height:100%;width:0;background:var(--green);border-radius:9px;box-shadow:0 0 12px #20d66b77;transition:width .5s}.money-map{grid-column:2;grid-row:1/4;align-self:stretch;display:flex;justify-content:space-around;align-items:center;gap:8px;position:relative;margin:0;overflow-x:auto;padding:8px 4px 8px 18px;border-left:1px solid #183d24;scrollbar-width:thin;scrollbar-color:#24472f transparent}.money-map:before{content:"";position:absolute;height:1px;background:#25352a;left:20px;right:8px;top:50%}.map-stop{position:relative;z-index:1;min-width:46px;text-align:center;color:var(--muted);font-size:10px;text-shadow:0 0 6px #20d66b22}.map-dot{width:16px;height:16px;border:1px solid #425348;background:#050906;border-radius:2px;margin:0 auto 7px;display:grid;place-items:center;color:#050906;font-size:10px}.map-stop.done{color:var(--green)}.map-stop.done .map-dot{border-color:var(--green);background:var(--green);box-shadow:0 0 12px #20d66b55}.map-stop.next .map-dot{border:2px solid var(--green);box-shadow:0 0 13px #20d66b55}.quick-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.quick-stat{border:1px solid #183d24;background:repeating-linear-gradient(0deg,#040705,#040705 3px,#050906 4px);border-radius:3px;padding:15px 18px;box-shadow:inset 0 0 16px #07150b}.quick-stat span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em}.quick-stat strong{display:block;color:var(--ink);font:600 20px/1.25 ui-sans-serif,system-ui,sans-serif;margin:7px 0 3px}.quick-stat small{color:var(--muted);font-size:10px}.quick-stat small b{color:var(--ink);font-weight:500}.progress-card{margin-top:12px}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.section-head h2{font-size:16px;letter-spacing:-.02em;color:var(--ink);margin:5px 0 0}.section-note{font-size:10px;color:var(--muted)}.milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mile{padding:12px;background:#030604;border:1px solid #151e18;border-radius:13px;min-height:96px}.mile.done{background:#07130b;border-color:#1b4a2b;box-shadow:inset 0 0 18px #0b301711}.mile .when{font-size:9px;font-weight:700;color:#7e8d81;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}.mile.done .when{color:var(--green)}.mile strong{font-size:12px;color:var(--ink);display:block;line-height:1.3}.mile p{font-size:10px;color:var(--muted);margin:4px 0 0}.foot{margin-top:14px;color:#737d75;font-size:9px}.foot a{color:var(--green)}dialog{border:1px solid #203326;border-radius:22px;padding:0;width:min(450px,calc(100% - 28px));background:#050906;color:var(--ink);box-shadow:0 24px 70px #000}dialog::backdrop{background:#000b}.form{padding:25px}.formtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.form h2{margin:0;font-size:18px;letter-spacing:-.04em;color:var(--green)}.close{border:1px solid var(--line);color:var(--green);background:transparent;border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer}.field{display:block;margin:13px 0}.field span{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.field input{width:100%;border:1px solid #25362a;border-radius:11px;padding:11px 12px;font:inherit;color:var(--green);background:#020503;accent-color:var(--green)}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.save{width:100%;border:1px solid var(--green);background:#082111;color:var(--green);border-radius:12px;padding:12px;font:inherit;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;cursor:pointer}.fine{font-size:10px;color:var(--muted);margin:12px 0 0}@media(max-width:650px){.wrap{padding:15px 16px 24px;margin:10px auto;border-radius:15px}.money-journey{grid-template-columns:1fr;row-gap:15px;padding:16px 0}.money-total{font-size:clamp(36px,9vw,50px)}.goal-line{margin:0 0 6px}.money-map{grid-column:1;grid-row:auto;min-height:55px;border-left:0;border-top:1px solid #183d24;padding:12px 4px 4px;justify-content:flex-start;gap:18px}.money-map:before{left:8px;top:22px}.map-stop{min-width:48px}.milestones{grid-template-columns:1fr 1fr}.card{padding:17px}}@media(max-width:390px){.quick-stats{grid-template-columns:1fr}.milestones{grid-template-columns:1fr}.journey-head{align-items:flex-end}}
-.buddy{position:absolute;left:50%;top:120px;z-index:8;width:66px;height:82px;padding:0;border:0;background:transparent;cursor:pointer;transform:translate(-50%,-50%);transition:left 1.25s cubic-bezier(.2,.75,.3,1),top 1.25s cubic-bezier(.2,.75,.3,1);filter:drop-shadow(0 0 8px #20d66b30)}.buddy-art{position:absolute;inset:0;width:100%;height:100%;overflow:visible;animation:buddyBob 2.8s ease-in-out infinite;transform-origin:50% 80%}.buddy-art .sitPose{display:none}.buddy.sit .buddy-art .walkPose{display:none}.buddy.sit .buddy-art .sitPose{display:block}.buddy.sit .buddy-art{animation:none}.buddy:hover .buddy-art{animation:buddyNod .4s ease-in-out 2}.buddy.peek .buddy-art{clip-path:inset(0 0 43% 0)}.buddy.peek.sit .buddy-art{clip-path:none}.buddy-bubble{position:absolute;bottom:calc(100% - 3px);left:50%;width:max-content;max-width:min(240px,calc(100vw - 44px));padding:9px 11px;border:1px solid #278c49;border-radius:4px;background:#020503;color:#8af5aa;font:11px/1.4 ui-monospace,Consolas,monospace;text-align:left;box-shadow:0 0 15px #20d66b22;transform:translateX(-50%);opacity:1;transition:opacity .25s}.buddy-bubble:after{content:"";position:absolute;left:50%;bottom:-5px;width:8px;height:8px;background:#020503;border-right:1px solid #278c49;border-bottom:1px solid #278c49;transform:translateX(-50%) rotate(45deg)}.buddy.quiet .buddy-bubble{opacity:0;pointer-events:none}.buddy.blink .buddy-art{animation:buddyBlink .4s ease-in-out}.buddy:focus-visible{outline:1px dashed var(--green);outline-offset:5px}@keyframes buddyBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(2deg)}}@keyframes buddyNod{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}@keyframes buddyBlink{0%,100%{filter:none}50%{filter:brightness(1.8)}}@media(prefers-reduced-motion:reduce){.buddy,.buddy-art,.buddy-bubble{transition:none!important;animation:none!important}}html,body{width:100%;max-width:100%;overflow-x:hidden}.wrap{width:calc(100% - 24px);max-width:1040px;margin:12px auto;padding:clamp(14px,3vw,28px)}.top{gap:10px;align-items:center;justify-content:space-between}.screen-tabs{display:flex;gap:4px;min-width:0}.screen-tab,.settings,.terminal-button,.wave-button{touch-action:manipulation}.screen-tab{min-width:52px;border:1px solid #20482b;background:#030805;color:#64836b;border-radius:2px;padding:8px 11px;font:700 11px ui-monospace,Consolas,monospace;letter-spacing:.08em}.screen-tab.active{color:#020503;background:var(--green);border-color:var(--green);box-shadow:0 0 12px #20d66b55}.settings{padding:8px 10px;white-space:nowrap}.screen-view{animation:screenAppear .32s ease-out}.screen-view[hidden]{display:none!important}@keyframes screenAppear{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}.screen-title{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid #1b4529}.screen-title strong{font-size:12px;color:var(--green);letter-spacing:.12em}.map-caption,.sos-copy{font-size:12px;color:var(--muted);margin:14px 0}.map-readout{display:flex;align-items:center;gap:13px;padding:11px 12px;border:1px solid #183d24;background:#040705}.map-readout span{font-size:10px;color:var(--muted);letter-spacing:.09em}.map-readout strong{font-size:20px;color:var(--green)}.map-readout small{margin-left:auto;font-size:10px;color:var(--muted)}.full-money-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}.route-stop{min-width:0;min-height:75px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;padding:10px;border:1px solid #1a2b1e;border-radius:3px;background:#040705;color:var(--muted);font:inherit;text-align:left;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}.route-stop:active{transform:scale(.97)}.route-stop.done{border-color:#268342;color:var(--green);background:#06100a}.route-stop.next{border-color:var(--green);box-shadow:inset 0 0 12px #20d66b20}.route-stop .route-amount{font-size:18px;font-weight:700}.route-stop small{font-size:9px;letter-spacing:.07em}.breath-panel{display:flex;flex-direction:column;align-items:center;gap:18px;margin:20px 0}.breath-ring{width:min(48vw,170px);aspect-ratio:1;border:1px solid #267c3d;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--green);box-shadow:0 0 25px #20d66b1c,inset 0 0 18px #20d66b12;transition:transform 4s ease-in-out,box-shadow 4s}.breath-ring span{font-size:10px;letter-spacing:.12em}.breath-ring strong{font-size:34px;line-height:1.1}.breath-ring.inhale{transform:scale(1.12);box-shadow:0 0 35px #20d66b40,inset 0 0 28px #20d66b25}.breath-ring.exhale{transform:scale(.94)}.terminal-button,.wave-button{border:1px solid #276b3a;border-radius:2px;background:#040a06;color:var(--green);padding:11px 13px;font:700 10px ui-monospace,Consolas,monospace;letter-spacing:.07em}.terminal-button:active,.wave-button:active{background:#0d2916}.sos-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sos-actions .terminal-button{height:100%;line-height:1.4}.wave-button{display:block;margin:16px auto 0;border-color:#20d66b;background:#082111}.buddy{width:62px;height:78px;transition:left .8s cubic-bezier(.2,.75,.3,1),top .8s cubic-bezier(.2,.75,.3,1)}.buddy-bubble{position:fixed;left:var(--bubble-x,50vw);top:var(--bubble-y,18px);bottom:auto;width:max-content;max-width:calc(100vw - 32px);overflow-wrap:anywhere;word-break:normal;white-space:normal;z-index:12}.buddy.bubble-left .buddy-bubble{transform:translateX(-100%)}.buddy.bubble-left .buddy-bubble:after{left:auto;right:12px;transform:rotate(45deg)}.buddy.bubble-right .buddy-bubble{transform:translateX(0)}.buddy.bubble-right .buddy-bubble:after{left:12px;transform:rotate(45deg)}.buddy.walking .buddy-art{animation:buddyWalk .28s ease-in-out infinite alternate}.buddy.walking .arms{animation:armSwing .28s ease-in-out infinite alternate;transform-origin:35px 55px}.buddy.walking .legs{animation:legSwing .28s ease-in-out infinite alternate;transform-origin:35px 68px}.buddy.talking .mouth{animation:buddySpeak .16s ease-in-out infinite alternate;transform-origin:35px 40px}.buddy.blink .buddy-art ellipse{transform:scaleY(.12);transform-origin:center 33px}.buddy.sit .buddy-art{animation:buddyIdleSit 3s ease-in-out infinite}.buddy.walking.sit .buddy-art{animation:buddyWalk .28s ease-in-out infinite alternate}@keyframes buddyWalk{from{transform:translateY(1px) rotate(-5deg)}to{transform:translateY(-3px) rotate(5deg)}}@keyframes armSwing{from{transform:rotate(-13deg)}to{transform:rotate(13deg)}}@keyframes legSwing{from{transform:rotate(8deg)}to{transform:rotate(-8deg)}}@keyframes buddySpeak{from{transform:scaleY(.6)}to{transform:scaleY(1.5)}}@keyframes buddyIdleSit{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}@media(max-width:600px){.wrap{width:calc(100% - 14px);margin:7px auto;padding:12px 12px 20px;border-radius:13px}.top{margin-bottom:12px;padding-bottom:9px}.screen-tab{min-width:46px;padding:8px 9px;font-size:10px}.settings{font-size:9px;padding:8px}.money-journey{grid-template-columns:minmax(0,1fr);row-gap:12px;padding:13px 0}.money-total{font-size:clamp(34px,10vw,48px)}.goal-line{font-size:9px;margin:0 0 5px}.quick-stats{gap:7px}.quick-stat{min-width:0;padding:11px 9px}.quick-stat strong{font-size:clamp(15px,4.6vw,19px);overflow-wrap:anywhere}.quick-stat small{font-size:9px}.map-readout{gap:7px;padding:9px}.map-readout strong{font-size:17px}.map-readout small{font-size:9px}.full-money-map{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.route-stop{min-height:65px;padding:9px}.route-stop .route-amount{font-size:16px}.sos-actions{grid-template-columns:1fr}.sos-actions .terminal-button{min-height:42px}.breath-ring{width:min(42vw,150px)}.buddy{width:55px;height:72px}.buddy-bubble{font-size:10px;padding:8px 9px}}@media(max-width:370px){.screen-tab{min-width:42px;padding-inline:7px}.money-total{font-size:32px}.quick-stats{grid-template-columns:1fr}.map-readout{flex-wrap:wrap}.map-readout small{margin-left:0;width:100%}.full-money-map{grid-template-columns:1fr 1fr}}@media(prefers-reduced-motion:reduce){.screen-view{animation:none!important}.route-stop,.breath-ring{transition:none!important}.buddy *{animation:none!important}}@media(max-width:600px){.fields{grid-template-columns:minmax(0,1fr)}dialog{max-height:calc(100dvh - 20px);overflow-y:auto}.wrap{margin-top:max(7px,env(safe-area-inset-top));margin-bottom:max(7px,env(safe-area-inset-bottom));padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}.screen-title{align-items:flex-start;flex-wrap:wrap}.map-caption,.sos-copy{font-size:11px}}
-.buddy-bubble{box-sizing:border-box}.buddy:not(.quiet) .buddy-bubble{animation:bubblePop .22s ease-out}@keyframes bubblePop{from{opacity:0;translate:0 5px;scale:.95}to{opacity:1;translate:0 0;scale:1}}</style>
-<style id="pipboy-reference-theme">
-:root{--green:#18f46a;--paper:#041008;--ink:#c4f1cf;--muted:#80a98b;--line:#174827;--mint:#031008}
-body{background:radial-gradient(ellipse at 50% 0%,#102217 0%,#090d0a 42%,#050605 100%);color:var(--ink)}
-.wrap{border:12px solid #1c211e;border-radius:28px;background:linear-gradient(145deg,#07150b 0%,#031008 48%,#06130a 100%);box-shadow:inset 0 0 65px #000d,inset 0 0 18px #18f46a12,0 0 24px #18f46a22,0 18px 45px #000b;isolation:isolate}
-.wrap:before{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;pointer-events:none;background:linear-gradient(rgba(10,14,11,0) 50%,rgba(0,0,0,.22) 50%),linear-gradient(90deg,rgba(255,0,0,.018),rgba(0,255,0,.018),rgba(0,0,255,.018));background-size:100% 4px,7px 100%;opacity:.48}
-.wrap:after{content:"";position:absolute;z-index:1;left:0;right:0;top:-110px;height:90px;pointer-events:none;background:linear-gradient(180deg,transparent,#18f46a0e,transparent);animation:crtSweep 9s linear infinite}
-.wrap>*{position:relative;z-index:2}.wrap>.buddy{position:absolute;z-index:8}
-@keyframes crtSweep{to{top:calc(100% + 110px)}}
-.card,.quick-stat,.mile,.map-readout,.route-stop,.screen-tab,.settings,.terminal-button,.wave-button{border-radius:3px}
-.money-journey{background:linear-gradient(135deg,#07150b88,#02050322);border:1px solid #1a4a2b;padding:20px;border-radius:4px;box-shadow:inset 0 0 28px #18f46a0c}
-.money-journey:before{top:-1px;left:-1px;width:68px;height:2px}
-.money-map{border-left-color:#205d32}
-.quick-stat{border-color:#1b5730;background:linear-gradient(135deg,#07150b,#030705);box-shadow:inset 0 0 20px #18f46a0c}
-.quick-stat strong{color:var(--green);text-shadow:0 0 9px #18f46a33;font-family:ui-monospace,"SFMono-Regular",Consolas,monospace}
-.mile{border-color:#1b3222;background:#030806}
-.mile.done{border-color:#1e6938;background:#06130a;box-shadow:inset 0 0 18px #18f46a12}
-.route-stop{border-color:#1c3e27;background:linear-gradient(140deg,#06110a,#030705)}
-.route-stop.done{border-color:#258b48;box-shadow:inset 0 0 16px #18f46a12}
-.route-stop.next{box-shadow:inset 0 0 16px #18f46a18,0 0 10px #18f46a1c}
-.screen-tab.active{box-shadow:0 0 14px #18f46a66}
-.settings:hover,.save:hover,.terminal-button:hover,.wave-button:hover{box-shadow:0 0 16px #18f46a2e}
-dialog{border-radius:4px;border-color:#23743d}
-.buddy{filter:drop-shadow(0 0 10px #18f46a55)}
-.buddy-bubble{border-radius:3px;background:#031008;color:#a4ffbb;box-shadow:0 0 18px #18f46a30}
-@media(max-width:600px){.wrap{border-width:7px;border-radius:17px;padding:10px 10px 18px}.money-journey{padding:14px 12px}.wrap:before{opacity:.36}}
-@media(prefers-reduced-motion:reduce){.wrap:after{animation:none!important}}
-</style>
-<style id="crt-game-fx">
-.wrap:before{animation:crtFlicker 7s steps(2,end) infinite}.money-total{transition:filter .2s,transform .2s}.money-total.payout{animation:payout .55s ease-out}.route-stop.just-earned{animation:earned .8s ease-out}.terminal-button:focus-visible,.screen-tab:focus-visible,.settings:focus-visible{outline:1px dashed var(--green);outline-offset:3px}.sound-toggle{border:1px solid #205b32;background:#031008;color:var(--green);font:700 10px ui-monospace,Consolas,monospace;letter-spacing:.08em;padding:8px 9px;min-width:52px;cursor:pointer}.sound-toggle[aria-pressed="false"]{color:var(--muted);border-color:#26352a}.sound-toggle:active{transform:translateY(1px)}@keyframes crtFlicker{0%,95%,97%,100%{opacity:.48}96%{opacity:.3}98%{opacity:.53}}@keyframes payout{0%{transform:scale(1);filter:brightness(1)}35%{transform:scale(1.12);filter:brightness(1.7)}100%{transform:scale(1);filter:brightness(1)}}@keyframes earned{0%{box-shadow:0 0 0 0 #18f46a77}70%{box-shadow:0 0 0 12px #18f46a00}100%{box-shadow:none}}@media(max-width:600px){.sound-toggle{min-width:43px;padding:8px 7px;font-size:9px}}@media(prefers-reduced-motion:reduce){.wrap:before{animation:none!important}.money-total.payout,.route-stop.just-earned{animation:none!important}}
-</style></head>
-<body><main class="wrap">
-<header class="top"><nav class="screen-tabs" role="tablist" aria-label="Schermate"><button class="screen-tab active" type="button" data-screen="stat" aria-controls="screen-stat" aria-selected="true">STAT</button><button class="screen-tab" type="button" data-screen="map" aria-controls="screen-map" aria-selected="false">MAP</button><button class="screen-tab" type="button" data-screen="sos" aria-controls="screen-sos" aria-selected="false">SOS</button></nav><div style="display:flex;gap:6px;align-items:center"><button class="sound-toggle" id="soundToggle" type="button" aria-label="Attiva o disattiva suoni" aria-pressed="true">SND ON</button><button class="settings" id="openSettings">SETUP</button></div></header>
-<section class="screen-view active" id="screen-stat"><section class="money-journey">
- <div class="journey-head"><div><div class="eyebrow">RISPARMIO</div></div><div class="money-total" id="money">€0</div></div>
- <div class="goal-line"><span id="nextGoalText">Prossimo traguardo</span><span id="goalRemaining">—</span></div><div class="track"><div class="track-fill" id="goalFill"></div></div>
- 
-</section>
-<section class="quick-stats"><div class="quick-stat"><span>Tempo senza fumo</span><strong id="duration">—</strong><small id="since">Imposta il giorno in cui hai smesso</small></div><div class="quick-stat"><span>Sigarette evitate</span><strong id="cigs">0</strong><small><b id="days">0</b> al giorno · <b id="waves">0</b> voglie superate</small></div></section></section>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault-Tec Quit-O-Matic 3000</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: VT323 & Share Tech Mono for authentic Pip-Boy retro terminal look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <!-- FontAwesome for iconic symbols -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<section class="screen-view" id="screen-map" hidden>
- <div class="screen-title"><span class="eyebrow">MAP // RISPARMIO</span><strong>TRAGUARDI</strong></div>
- <p class="map-caption">Ogni tappa è denaro rimasto dalla tua parte.</p>
- <div class="map-readout"><span>PROSSIMA TAPPA</span><strong id="mapNextGoal">—</strong><small id="mapGoalRemaining">—</small></div>
- <div class="full-money-map" id="moneyMap" aria-label="Mappa dei traguardi di risparmio"></div>
-</section>
-<section class="screen-view" id="screen-sos" hidden>
- <div class="screen-title"><span class="eyebrow">SOS // MOMENTO DI VOGLIA</span><strong>PASSA ANCHE QUESTA</strong></div>
- <p class="sos-copy" id="sosCopy">Scegli una mossa semplice. Fai partire un minuto di respirazione o scegli una distrazione rapida.</p>
- <div class="breath-panel"><div class="breath-ring" id="breathRing"><span id="breathPhase">PRONTO</span><strong id="breathCount">60</strong></div><button class="terminal-button" type="button" id="startBreathing">AVVIA 60 SECONDI</button></div>
- <div class="sos-actions"><button class="terminal-button" type="button" data-sos="water">BEVI UN SORSO</button><button class="terminal-button" type="button" data-sos="walk">CAMMINA UN MINUTO</button><button class="terminal-button" type="button" data-sos="message">SCRIVI A QUALCUNO</button></div>
- <button class="wave-button" id="wavePassed" type="button">✓ È PASSATA</button>
-</section>
-<button type="button" class="buddy" id="buddy" aria-label="Parla con la mascotte">
- <span class="buddy-bubble" id="buddyBubble">La voglia dura poco. Il tuo risparmio, invece, resta.</span>
- <svg class="buddy-art" viewBox="0 0 70 82" aria-hidden="true">
-  <path d="M35 17V8m0 0c-8-8 8-8 0 0" fill="none" stroke="#20d66b" stroke-width="3" stroke-linecap="round"/>
-  <path d="M18 23Q18 14 35 14t17 9v23H18z" fill="#092313" stroke="#20d66b" stroke-width="2.5"/>
-  <path d="M22 26q13-8 26 0v14q-13 8-26 0z" fill="#020503" stroke="#20d66b" stroke-width="1.5"/>
-  <ellipse cx="29" cy="33" rx="2.8" ry="4" fill="#20d66b"/><ellipse cx="41" cy="33" rx="2.8" ry="4" fill="#20d66b"/>
-  <path class="mouth" d="M30 40q5 4 10 0" fill="none" stroke="#20d66b" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M23 49h24l5 17H18z" fill="#0a2915" stroke="#20d66b" stroke-width="2.5"/>
-  <path d="M28 53h14v8H28z" fill="#020503" stroke="#20d66b" stroke-width="1.5"/><path d="M32 56h6" stroke="#20d66b" stroke-width="1.5"/>
-  <g class="walkPose"><path class="arms" d="M18 53 9 61m43-8 9 8" fill="none" stroke="#20d66b" stroke-width="3" stroke-linecap="round"/><path class="legs" d="M25 66l-3 9m23-9 3 9" fill="none" stroke="#20d66b" stroke-width="3" stroke-linecap="round"/><path d="M16 76h8m22 0h8" stroke="#20d66b" stroke-width="3" stroke-linecap="round"/></g>
-  <g class="sitPose"><path d="M18 54 10 61m42-7 8 7M25 65h-9v7m29-7h9v7" fill="none" stroke="#20d66b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 69h46" stroke="#20d66b" stroke-width="1.5" stroke-dasharray="3 3"/></g>
- </svg>
-</button></main>
-<dialog id="settings"><form class="form" id="settingsForm"><div class="formtop"><h2>Il tuo punto di partenza</h2><button type="button" class="close" id="closeSettings" aria-label="Chiudi">×</button></div><label class="field"><span>Quando hai smesso?</span><input id="quitAt" type="datetime-local" required></label><div class="fields"><label class="field"><span>Sigarette al giorno</span><input id="perDay" type="number" min="0" step="1" required></label><label class="field"><span>Prezzo del pacchetto (€)</span><input id="packCost" type="number" min="0" step="0.01" required></label></div><label class="field"><span>Sigarette per pacchetto</span><input id="packSize" type="number" min="1" step="1" required></label><button class="save" type="submit">Salva</button><p class="fine">Puoi modificare questi dati quando vuoi. Vengono salvati solo su questo dispositivo.</p></form></dialog>
-<script>
-// Suoni Pip-Boy sintetizzati al volo: nessun file audio o libreria esterna.
-let audioContext=null,soundOn=localStorage.getItem('pip-sound')!=='off';
-function playRetroSound(kind='click'){
- if(!soundOn)return;
- try{
-  const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;
-  audioContext ||= new Ctx();if(audioContext.state==='suspended')audioContext.resume();
-  const now=audioContext.currentTime;
-  const notes=kind==='reward'?[523.25,659.25,783.99]:kind==='beep'?[1200]:[820];
-  notes.forEach((frequency,index)=>{const osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type=kind==='reward'?'triangle':kind==='beep'?'sine':'square';osc.frequency.setValueAtTime(kind==='click'?frequency:frequency,now+index*.075);if(kind==='click')osc.frequency.exponentialRampToValueAtTime(390,now+.045);gain.gain.setValueAtTime(kind==='reward'?.075:.035,now+index*.075);gain.gain.exponentialRampToValueAtTime(.001,now+(kind==='reward'?.34:kind==='beep'?.14:.05)+index*.075);osc.connect(gain);gain.connect(audioContext.destination);osc.start(now+index*.075);osc.stop(now+(kind==='reward'?.35:kind==='beep'?.15:.055)+index*.075)});
- }catch{}
-}
-const soundToggle=document.getElementById('soundToggle');function paintSoundToggle(){soundToggle.textContent=soundOn?'SND ON':'SND OFF';soundToggle.setAttribute('aria-pressed',String(soundOn))}paintSoundToggle();soundToggle.addEventListener('click',()=>{soundOn=!soundOn;localStorage.setItem('pip-sound',soundOn?'on':'off');paintSoundToggle();if(soundOn)playRetroSound('beep')});
-document.addEventListener('click',event=>{if(event.target.closest('button')&&!event.target.closest('#soundToggle'))playRetroSound('click')});
-const localNow=new Date();localNow.setMinutes(localNow.getMinutes()-localNow.getTimezoneOffset());
-const defaults={quitAt:localNow.toISOString().slice(0,16),perDay:10,packCost:6,packSize:20,waves:0};
-let data;try{data={...defaults,...JSON.parse(localStorage.getItem('libero-settings')||'{}')}}catch{data=defaults}
-const $=id=>document.getElementById(id),euro=new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}),goals=[10,25,50,100,250,500,1000,2000,5000];
-function render(){const start=new Date(data.quitAt),now=new Date(),elapsed=Math.max(0,now-start),days=elapsed/864e5,perDay=Number(data.perDay)||0,saved=days*perDay/Number(data.packSize)*Number(data.packCost);const d=Math.floor(elapsed/864e5),h=Math.floor(elapsed%864e5/36e5),totalHours=Math.floor(elapsed/36e5),m=Math.floor(elapsed%36e5/6e4);$('duration').textContent=totalHours+' ore e '+m+' minuti';$('since').textContent=d+' giorni, '+h+' ore e '+m+' minuti senza sigarette';$('money').textContent=euro.format(saved);$('cigs').textContent=Math.floor(days*perDay).toLocaleString('it-IT');$('days').textContent=perDay.toLocaleString('it-IT');$('waves').textContent=Number(data.waves)||0;const next=goals.find(x=>saved<x)||Math.ceil((saved+1)/5000)*5000,prev=goals.filter(x=>x<=saved).at(-1)||0,progress=Math.min(100,Math.max(0,(saved-prev)/(next-prev)*100));$('nextGoalText').textContent='Prossimo traguardo · '+euro.format(next);$('goalRemaining').textContent='mancano '+euro.format(Math.max(0,next-saved));$('goalFill').style.width=progress+'%';$('mapNextGoal').textContent=euro.format(next);$('mapGoalRemaining').textContent='mancano '+euro.format(Math.max(0,next-saved));const shown=saved>5000?[...goals,next]:goals;$('moneyMap').innerHTML=shown.map(x=>'<button type="button" class="route-stop '+(saved>=x?'done ':'')+(x===next?'next':'')+'" data-goal="'+x+'"><span class="route-amount">'+euro.format(x)+'</span><small>'+(saved>=x?'✓ RAGGIUNTO':x===next?'PROSSIMA TAPPA':'DA RAGGIUNGERE')+'</small></button>').join('');$('moneyMap').querySelectorAll('.route-stop').forEach(button=>button.addEventListener('click',()=>{const goal=Number(button.dataset.goal),remaining=Math.max(0,goal-saved);showBubble(remaining===0?'Tappa '+euro.format(goal)+' conquistata. Me lo segno, così poi posso vantarmene.':'A '+euro.format(goal)+' mancano '+euro.format(remaining)+'. Piano piano, campione.')}));}
-let previousSaved=null;function renderWithRewards(){render();const saved=(Math.max(0,(Date.now()-new Date(data.quitAt))/864e5))*(Number(data.perDay)||0)/(Number(data.packSize)||1)*(Number(data.packCost)||0);if(previousSaved!==null&&goals.some(goal=>previousSaved<goal&&saved>=goal)){playRetroSound('reward');$('money').classList.remove('payout');void $('money').offsetWidth;$('money').classList.add('payout');showBubble('Tappa conquistata. Il bottino è tutto tuo.')}previousSaved=saved;}
-const buddy=$('buddy'),buddyBubble=$('buddyBubble');
-const prefixes=['La voglia è arrivata puntuale, come una bolletta.','Il cervello ha proposto la solita pessima sceneggiatura.','Ecco il vecchio impulso, riciclato con zero fantasia.','L’allarme nicotina sta facendo un po’ troppo teatro.','La sigaretta immaginaria ha chiesto udienza. Respinta.','Un momento scomodo, che si crede importante.','La tua abitudine ha bussato. Che educazione discutibile.','Il desiderio fa rumore; non è un ordine, genio.','La tentazione è tornata senza nemmeno un aggiornamento.','La nicotina reclama il palco. Il palco è chiuso.'];
-const actions=['Fai due respiri lenti','Bevi un bicchiere d’acqua','Cammina fino alla prossima stanza','Aspetta cinque minuti prima di decidere','Tieni le mani occupate con qualcosa','Mastica una gomma o sgranocchia una carota','Scrivi a qualcuno che fa il tifo per te','Allontanati dal posto in cui fumavi','Fai quattro respiri e rilassa le spalle','Esci a prendere un po’ d’aria'];
-const closers=['Sono pochi minuti: lascia passare l’onda senza trattare con la vecchia abitudine.','Ogni sigaretta saltata è denaro recuperato; la matematica non fuma.','Sembra un esame, ma devi superare solo questa domanda.','Hai già superato momenti così, anche se il tuo ego non ha tenuto il verbale.','Il tuo conto sta facendo un applauso silenzioso.','Non serve vincere tutta la giornata adesso: basta questa scelta.','Respira. Ecco, ora anche la mascotte ha quasi smesso di fare la saccente.','Questo impulso si consuma da solo; non serve alimentarlo.','Una scelta alla volta: oggi puoi assegnarti un punto.','La tua abitudine si aspetta un sì. Sorprendila con un no educato.'];
-const phraseDeck=[];prefixes.forEach(a=>actions.forEach(b=>closers.forEach(c=>phraseDeck.push(a+' '+b.charAt(0).toUpperCase()+b.slice(1)+'. '+c))));let seed=Number(localStorage.getItem('buddy-seed'));if(!seed){seed=Math.floor(Math.random()*4294967295);localStorage.setItem('buddy-seed',String(seed))}function rand(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296}for(let i=phraseDeck.length-1;i>0;i--){const j=Math.floor(rand()*(i+1));[phraseDeck[i],phraseDeck[j]]=[phraseDeck[j],phraseDeck[i]]}let phraseIndex=Number(localStorage.getItem('buddy-index'))||0;function nextPhrase(){const phrase=phraseDeck[phraseIndex%phraseDeck.length];phraseIndex++;localStorage.setItem('buddy-index',String(phraseIndex));return phrase}
-const buddyStops={stat:[{selector:'.money-total',dx:0,dy:34,peek:false,sit:false},{selector:'.quick-stat:first-child',dx:-22,peek:true,sit:true},{selector:'.quick-stat:last-child',dx:22,peek:true,sit:true}],map:[{selector:'.route-stop:nth-child(2)',peek:true,sit:false},{selector:'.route-stop:nth-child(5)',peek:true,sit:true},{selector:'.map-readout',peek:false,sit:false}],sos:[{selector:'#breathRing',peek:false,sit:false},{selector:'#startBreathing',peek:true,sit:true},{selector:'.sos-actions .terminal-button:nth-child(2)',peek:true,sit:false}]};let activeScreen='stat',buddyIndex=0,buddySpeakTimer,walkTimer,talkTimer,blinkTimer;
-function placeBubble(){const rect=buddy.getBoundingClientRect(),bubble=buddyBubble.getBoundingClientRect(),pad=12,half=Math.min(bubble.width,window.innerWidth-pad*2)/2;const center=Math.max(pad+half,Math.min(window.innerWidth-pad-half,rect.left+rect.width/2));buddy.style.setProperty('--bubble-x',center+'px');buddy.style.setProperty('--bubble-y',Math.max(8,rect.top-bubble.height-10)+'px');buddy.classList.toggle('bubble-left',center>window.innerWidth/2+20);buddy.classList.toggle('bubble-right',center<window.innerWidth/2-20)}
-function showBubble(text){buddyBubble.textContent=text;buddy.classList.remove('quiet');buddy.classList.add('talking');window.clearTimeout(buddySpeakTimer);window.clearTimeout(talkTimer);placeBubble();talkTimer=window.setTimeout(()=>buddy.classList.remove('talking'),2400);buddySpeakTimer=window.setTimeout(()=>buddy.classList.add('quiet'),9500)}
-function moveBuddy(){const list=buddyStops[activeScreen],stop=list[buddyIndex++%list.length],target=document.querySelector(stop.selector);if(!target)return;const outer=document.querySelector('.wrap').getBoundingClientRect(),box=target.getBoundingClientRect();buddy.style.left=(box.left-outer.left+box.width/2+(stop.dx||0))+'px';buddy.style.top=(stop.peek?box.top-outer.top+(stop.sit?-28:2):box.top-outer.top+box.height/2+(stop.dy||0))+'px';buddy.classList.toggle('peek',!!stop.peek);buddy.classList.toggle('sit',!!stop.sit);buddy.classList.remove('quiet');buddy.classList.add('walking');window.clearTimeout(walkTimer);walkTimer=window.setTimeout(()=>buddy.classList.remove('walking'),1100);window.clearTimeout(buddySpeakTimer);buddySpeakTimer=window.setTimeout(()=>buddy.classList.add('quiet'),7800);window.setTimeout(placeBubble,30)}
-function talkBuddy(){showBubble(nextPhrase());buddy.classList.add('blink');window.setTimeout(()=>buddy.classList.remove('blink'),260)}
-function switchScreen(name){activeScreen=name;document.querySelectorAll('.screen-tab').forEach(button=>{const selected=button.dataset.screen===name;button.classList.toggle('active',selected);button.setAttribute('aria-selected',String(selected))});document.querySelectorAll('.screen-view').forEach(section=>{section.hidden=section.id!=='screen-'+name});buddyIndex=0;window.setTimeout(moveBuddy,60)}
-document.querySelectorAll('.screen-tab').forEach(button=>button.addEventListener('click',()=>switchScreen(button.dataset.screen)));buddy.addEventListener('click',talkBuddy);
-window.addEventListener('resize',()=>{moveBuddy();placeBubble()});window.addEventListener('scroll',()=>{moveBuddy();placeBubble()},{passive:true});
-let breathTimer=null,breathElapsed=0;function stopBreathing(){window.clearInterval(breathTimer);breathTimer=null;$('breathRing').classList.remove('inhale','exhale')}
-$('startBreathing').addEventListener('click',()=>{if(breathTimer)return;breathElapsed=0;$('breathCount').textContent='60';$('sosCopy').textContent='Segui il ritmo. Non devi risolvere altro per un minuto.';function tick(){const phase=breathElapsed%8<4?'INSPIRA':'ESPIRA';$('breathPhase').textContent=phase;$('breathRing').classList.toggle('inhale',phase==='INSPIRA');$('breathRing').classList.toggle('exhale',phase==='ESPIRA');$('breathCount').textContent=String(60-breathElapsed);if(breathElapsed>=60){stopBreathing();$('breathPhase').textContent='FATTO';$('breathCount').textContent='✓';$('sosCopy').textContent='Un minuto passato senza fumare. Sì, conta.';showBubble('Un minuto in più dalla tua parte. Me lo segno.');return}breathElapsed++}tick();breathTimer=window.setInterval(tick,1000)});
-const sosMessages={water:'Bevi lentamente un bicchiere d’acqua. Poi ricontrolla come ti senti.',walk:'Alzati e cammina un minuto, anche solo fino alla prossima stanza.',message:'Scrivi a qualcuno: “Mi è venuta voglia. Mi distrai due minuti?”'};document.querySelectorAll('[data-sos]').forEach(button=>button.addEventListener('click',()=>{const message=sosMessages[button.dataset.sos];$('sosCopy').textContent=message;showBubble(nextPhrase())}));$('wavePassed').addEventListener('click',()=>{data.waves=(Number(data.waves)||0)+1;localStorage.setItem('libero-settings',JSON.stringify(data));$('sosCopy').textContent='La voglia è passata senza una sigaretta. Punto per te.';renderWithRewards();playRetroSound('reward');showBubble('Ecco. Tutto questo dramma, e alla fine hai vinto tu.')});
-function open(){ $('quitAt').value=data.quitAt;$('perDay').value=data.perDay;$('packCost').value=data.packCost;$('packSize').value=data.packSize;$('settings').showModal() }
-$('openSettings').onclick=open;$('closeSettings').onclick=()=>$('settings').close();$('settingsForm').onsubmit=e=>{e.preventDefault();data={...data,quitAt:$('quitAt').value,perDay:+$('perDay').value,packCost:+$('packCost').value,packSize:+$('packSize').value};localStorage.setItem('libero-settings',JSON.stringify(data));$('settings').close();render()};renderWithRewards();showBubble(nextPhrase());moveBuddy();window.setInterval(renderWithRewards,60000);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){window.setInterval(()=>{showBubble(nextPhrase());moveBuddy()},11000);blinkTimer=window.setInterval(()=>{buddy.classList.add('blink');window.setTimeout(()=>buddy.classList.remove('blink'),220)},3200)}
-</script></body></html>
+    <style>
+        :root {
+            --pip-green: #00ff66;
+            --pip-green-dim: #008833;
+            --pip-green-dark: #002208;
+            --pip-bg: #051108;
+            --pip-amber: #ffb000;
+        }
 
+        body {
+            background-color: #0d0d0d;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--pip-green);
+            overflow-x: hidden;
+            user-select: none;
+        }
 
+        /* CRT Screen Shell Effect */
+        .crt-container {
+            background-color: var(--pip-bg);
+            border: 18px solid #1c1f1d;
+            border-radius: 28px;
+            box-shadow: 
+                inset 0 0 80px rgba(0, 0, 0, 0.9),
+                0 0 20px rgba(0, 255, 102, 0.15),
+                0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
 
+        .crt-container::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 20;
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+        }
 
+        /* CRT Scanline Flicker */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 21;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 255, 102, 0.08) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.6;
+            position: absolute;
+            bottom: 100%;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
 
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100px; }
+        }
 
+        /* Ambient Screen Flicker */
+        .crt-flicker {
+            animation: flicker 0.15s infinite alternate;
+        }
 
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            100% { opacity: 1; }
+        }
 
+        /* Pip-Boy Glow Effects */
+        .pip-glow {
+            text-shadow: 0 0 6px rgba(0, 255, 102, 0.8), 0 0 12px rgba(0, 255, 102, 0.4);
+        }
 
+        .pip-glow-box {
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3), inset 0 0 8px rgba(0, 255, 102, 0.2);
+        }
 
+        .pip-border {
+            border: 2px solid var(--pip-green);
+        }
 
+        .pip-border-dashed {
+            border: 2px dashed var(--pip-green);
+        }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--pip-bg);
+            border-left: 1px solid var(--pip-green-dim);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--pip-green);
+            box-shadow: 0 0 6px var(--pip-green);
+        }
 
+        /* Active Tab Styling */
+        .pip-tab.active {
+            background-color: var(--pip-green);
+            color: var(--pip-bg);
+            font-weight: bold;
+            box-shadow: 0 0 12px var(--pip-green);
+        }
 
+        /* Vault Boy SVG Canvas / Animation Frame */
+        .vault-boy-container {
+            filter: drop-shadow(0px 0px 5px var(--pip-green));
+        }
 
+        /* Custom Input Styling */
+        input, select {
+            background-color: rgba(0, 34, 8, 0.8) !important;
+            color: var(--pip-green) !important;
+            border: 1px solid var(--pip-green) !important;
+            font-family: 'Share Tech Mono', monospace !important;
+        }
+        input:focus {
+            outline: none !important;
+            box-shadow: 0 0 8px var(--pip-green) !important;
+        }
 
+        /* Pulse Animation for Craving Button */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(0, 255, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+        }
+        .btn-pulse {
+            animation: pulse-green 2s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-2 sm:p-4">
 
+    <!-- PIP-BOY HARDWARE CASING -->
+    <div class="w-full max-w-5xl crt-container crt-flicker p-4 sm:p-6 relative text-sm sm:text-base">
+        <div class="scanline"></div>
 
+        <!-- CRT HEADER / SYSTEM STATUS -->
+        <header class="border-b-2 border-emerald-500/80 pb-3 mb-4 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-radiation text-2xl sm:text-3xl pip-glow animate-spin" style="animation-duration: 12s;"></i>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold tracking-wider pip-glow uppercase">VAULT-TEC QUIT-O-MATIC 3000</h1>
+                    <p class="text-xs text-emerald-400/80 uppercase tracking-widest">SISTEMA DI MONITORAGGIO TOSSINE v4.0.2</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4 text-xs sm:text-sm">
+                <div class="border border-emerald-500/60 px-2 py-1 rounded bg-emerald-950/40">
+                    <span class="opacity-70">RADS:</span> <span class="pip-glow font-bold">0.00 / h</span>
+                </div>
+                <div class="border border-emerald-500/60 px-2 py-1 rounded bg-emerald-950/40">
+                    <span class="opacity-70">STABILITÀ:</span> <span class="pip-glow font-bold text-emerald-400">100%</span>
+                </div>
+                <button onclick="openConfigModal()" class="border border-emerald-500 px-2 py-1 hover:bg-emerald-500 hover:text-black transition-colors rounded uppercase text-xs font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-gear"></i> IMPOSTAZIONI
+                </button>
+            </div>
+        </header>
 
+        <!-- NAVIGATION TABS -->
+        <nav class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+            <button onclick="switchTab('stat')" id="tab-stat" class="pip-tab active py-2 px-3 border border-emerald-500 text-center uppercase tracking-wider transition-all rounded-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-chart-line"></i> [ STAT ]
+            </button>
+            <button onclick="switchTab('health')" id="tab-health" class="pip-tab py-2 px-3 border border-emerald-500 text-center uppercase tracking-wider transition-all rounded-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-heart-pulse"></i> [ SALUTE ]
+            </button>
+            <button onclick="switchTab('savings')" id="tab-savings" class="pip-tab py-2 px-3 border border-emerald-500 text-center uppercase tracking-wider transition-all rounded-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-coins"></i> [ TAPPI ]
+            </button>
+            <button onclick="switchTab('perks')" id="tab-perks" class="pip-tab py-2 px-3 border border-emerald-500 text-center uppercase tracking-wider transition-all rounded-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-award"></i> [ PERK ]
+            </button>
+        </nav>
 
+        <!-- TAB CONTENT CONTAINER -->
+        <main class="min-h-[420px] relative">
 
+            <!-- ================= TAB 1: STAT (OVERVIEW) ================= -->
+            <section id="content-stat" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Vault Boy Graphics Display -->
+                    <div class="md:col-span-5 flex flex-col items-center justify-center border-2 border-emerald-500/60 p-4 rounded-lg bg-emerald-950/20 pip-glow-box">
+                        <div class="vault-boy-container w-48 h-48 sm:w-56 sm:h-56 relative flex items-center justify-center">
+                            <!-- SVG Retro Vault Boy Simulation -->
+                            <svg viewBox="0 0 200 200" class="w-full h-full stroke-emerald-400 fill-none" stroke-width="2">
+                                <!-- Vault Boy Head -->
+                                <circle cx="100" cy="70" r="35" stroke="currentColor" fill="#051108" />
+                                <!-- Hair -->
+                                <path d="M 70 65 Q 85 40 115 50 Q 130 55 135 70" stroke="currentColor" fill="none" stroke-width="3" />
+                                <!-- Eyes & Smile -->
+                                <circle cx="88" cy="68" r="3" fill="currentColor" />
+                                <circle cx="112" cy="68" r="3" fill="currentColor" />
+                                <path d="M 88 82 Q 100 95 112 82" stroke="currentColor" fill="none" stroke-width="2.5" />
+                                <!-- Body -->
+                                <path d="M 70 105 L 130 105 L 120 160 L 80 160 Z" stroke="currentColor" fill="#051108" />
+                                <!-- Thumbs Up Arm -->
+                                <path d="M 130 110 L 155 100 L 160 85" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                                <path d="M 160 82 L 160 70 L 165 70 L 165 85" stroke="currentColor" stroke-width="3" />
+                                <!-- Healthy Lungs Outline inside chest -->
+                                <path d="M 90 120 Q 80 125 82 140 Q 95 145 95 125 Z" fill="currentColor" class="animate-pulse" opacity="0.6"/>
+                                <path d="M 110 120 Q 120 125 118 140 Q 105 145 105 125 Z" fill="currentColor" class="animate-pulse" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <span class="bg-emerald-500 text-black text-xs font-bold px-2 py-0.5 rounded">CONDIZIONE: OTTIMALE</span>
+                            <p class="text-xs mt-1 text-emerald-400/80">POLMONI IN RIGENERAZIONE</p>
+                        </div>
+                    </div>
+
+                    <!-- Live Stats Counters -->
+                    <div class="md:col-span-7 space-y-4">
+                        
+                        <!-- Main Time Counter -->
+                        <div class="border-2 border-emerald-500 p-4 rounded-lg bg-emerald-950/30 pip-glow-box">
+                            <h2 class="text-xs uppercase tracking-widest text-emerald-400/80 mb-1"><i class="fa-solid fa-clock"></i> TEMPO SENZA FUMO</h2>
+                            <div id="timer-display" class="font-mono text-xl sm:text-3xl font-bold pip-glow tracking-wider grid grid-cols-4 text-center divide-x divide-emerald-500/40">
+                                <div><span id="days">00</span><span class="block text-xs font-normal">GIORNI</span></div>
+                                <div><span id="hours">00</span><span class="block text-xs font-normal">ORE</span></div>
+                                <div><span id="minutes">00</span><span class="block text-xs font-normal">MINUTI</span></div>
+                                <div><span id="seconds">00</span><span class="block text-xs font-normal">SECONDI</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Metrics -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="border border-emerald-500/80 p-3 rounded bg-emerald-950/20">
+                                <div class="text-xs text-emerald-400/80 uppercase"><i class="fa-solid fa-ban"></i> SIGARETTE EVITATE</div>
+                                <div id="cigs-avoided" class="text-2xl sm:text-3xl font-bold pip-glow mt-1">0</div>
+                                <div class="text-[10px] text-emerald-500/70 mt-1">Tossine non introdotte nel corpo</div>
+                            </div>
+
+                            <div class="border border-emerald-500/80 p-3 rounded bg-emerald-950/20">
+                                <div class="text-xs text-emerald-400/80 uppercase"><i class="fa-solid fa-shield-halved"></i> CRAVING VINTI</div>
+                                <div id="cravings-count" class="text-2xl sm:text-3xl font-bold pip-glow mt-1">0</div>
+                                <div class="text-[10px] text-emerald-500/70 mt-1">Attacchi della scimmia respinti</div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Craving Button -->
+                        <div class="pt-2">
+                            <button onclick="logCraving()" class="w-full btn-pulse py-3 bg-emerald-500 text-black font-bold text-sm sm:text-base uppercase tracking-wider rounded hover:bg-emerald-400 transition-colors flex items-center justify-center gap-2 shadow-lg">
+                                <i class="fa-solid fa-hand-fist text-lg"></i> REGISTRA DESIDERIO VINTO! (+1 CRAVING)
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB 2: HEALTH (S.P.E.C.I.A.L. RECOVERY) ================= -->
+            <section id="content-health" class="hidden space-y-4">
+                <div class="border-b border-emerald-500/50 pb-2 mb-4 flex justify-between items-center">
+                    <h2 class="text-lg font-bold uppercase tracking-wider pip-glow"><i class="fa-solid fa-heart-pulse"></i> RECUPERO S.P.E.C.I.A.L. BIOLOGICO</h2>
+                    <span class="text-xs text-emerald-400/70">DECONTAMINAZIONE IN CORSO</span>
+                </div>
+
+                <div id="health-milestones-list" class="space-y-4">
+                    <!-- Progress items dynamically populated by JS -->
+                </div>
+            </section>
+
+            <!-- ================= TAB 3: SAVINGS (CAPS & LOOT) ================= -->
+            <section id="content-savings" class="hidden space-y-6">
+                <!-- Total Caps Saved Box -->
+                <div class="border-2 border-emerald-500 p-4 rounded-lg bg-emerald-950/30 text-center pip-glow-box">
+                    <span class="text-xs uppercase tracking-widest text-emerald-400/80"><i class="fa-solid fa-coins"></i> RISPARMIO TOTALE ACCUMULATO</span>
+                    <div class="text-3xl sm:text-5xl font-bold pip-glow mt-2 flex justify-center items-center gap-3">
+                        <i class="fa-solid fa-bottle-cap text-amber-400 animate-bounce"></i>
+                        <span id="caps-saved">0.00</span> <span class="text-xl sm:text-2xl">CAPS / €</span>
+                    </div>
+                    <p class="text-xs text-emerald-400/70 mt-2">Denaro sottratto alle industrie di fumo della Zona Contaminata.</p>
+                </div>
+
+                <!-- Loot Unlocked Tracker -->
+                <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider mb-3 text-emerald-400 border-b border-emerald-500/40 pb-1">
+                        <i class="fa-solid fa-box-open"></i> BOTTINO SBLOCCABILE NELLA ZONA CONTAMINATA
+                    </h3>
+                    
+                    <div id="loot-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Loot items generated dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB 4: PERKS (BADGES) ================= -->
+            <section id="content-perks" class="hidden space-y-4">
+                <div class="border-b border-emerald-500/50 pb-2 mb-4 flex justify-between items-center">
+                    <h2 class="text-lg font-bold uppercase tracking-wider pip-glow"><i class="fa-solid fa-award"></i> PERK & DISTINTIVI SBLOCCATI</h2>
+                    <span class="text-xs text-emerald-400/70">ABILITÀ ACQUISITE</span>
+                </div>
+
+                <div id="perks-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Perks items generated dynamically -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER BAR -->
+        <footer class="mt-6 pt-3 border-t-2 border-emerald-500/80 flex flex-wrap justify-between items-center text-xs text-emerald-400/70 gap-2">
+            <div>VAULT-TEC CORPORATION &copy; 2077 - SECURE SYSTEM</div>
+            <div id="terminal-status" class="animate-pulse">● ONLINE | CANALE S.P.E.C.I.A.L. ATTIVO</div>
+        </footer>
+    </div>
+
+    <!-- CONFIGURATION MODAL -->
+    <div id="config-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-[#051108] border-2 border-emerald-500 p-6 rounded-lg max-w-md w-full pip-glow-box text-emerald-400 space-y-4 relative">
+            <h3 class="text-xl font-bold uppercase border-b border-emerald-500 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-sliders"></i> CONFIGURAZIONE PIP-BOY
+            </h3>
+
+            <form id="config-form" onsubmit="saveConfig(event)" class="space-y-3 text-sm">
+                <div>
+                    <label class="block text-xs uppercase mb-1">Data e Ora di Inizio Stop:</label>
+                    <input type="datetime-local" id="cfg-quit-date" required class="w-full p-2 rounded">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase mb-1">Sigarette fumate al giorno (prima di smettere):</label>
+                    <input type="number" id="cfg-cigs-day" min="1" max="100" required class="w-full p-2 rounded">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase mb-1">Prezzo di un pacchetto (€):</label>
+                    <input type="number" id="cfg-pack-price" step="0.1" min="1" max="50" required class="w-full p-2 rounded">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase mb-1">Sigarette in un pacchetto:</label>
+                    <input type="number" id="cfg-pack-size" min="1" max="50" required class="w-full p-2 rounded">
+                </div>
+
+                <div class="pt-3 flex gap-2 justify-end">
+                    <button type="button" onclick="closeConfigModal()" class="px-4 py-2 border border-emerald-500 rounded hover:bg-emerald-950 uppercase text-xs">Annulla</button>
+                    <button type="submit" class="px-4 py-2 bg-emerald-500 text-black font-bold rounded hover:bg-emerald-400 uppercase text-xs">Salva Dati</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Default User Data State
+        let userData = {
+            quitDate: new Date(Date.now() - (36 * 3600 * 1000)).toISOString().slice(0, 16), // Default 36h ago for instant demo preview
+            cigsPerDay: 15,
+            packPrice: 6.00,
+            packSize: 20,
+            cravingsResisted: 5
+        };
+
+        // Sound Effects via Web Audio API (Synthesizer clicks & beeps)
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioCtx();
+        }
+
+        function playRetroSound(type) {
+            try {
+                initAudio();
+                if (!audioCtx) return;
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+
+                if (type === 'click') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(800, now);
+                    osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } else if (type === 'beep') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1200, now);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+                    osc.start(now);
+                    osc.stop(now + 0.15);
+                } else if (type === 'reward') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                }
+            } catch (e) {
+                // Audio context block handling
+            }
+        }
+
+        // Load / Save Local Storage
+        function loadUserData() {
+            const saved = localStorage.getItem('pipboy_quit_data');
+            if (saved) {
+                try {
+                    userData = { ...userData, ...JSON.parse(saved) };
+                } catch (e) {}
+            }
+        }
+
+        function saveUserData() {
+            localStorage.setItem('pipboy_quit_data', JSON.stringify(userData));
+        }
+
+        // Tab Navigation
+        function switchTab(tabId) {
+            playRetroSound('click');
+            document.querySelectorAll('.pip-tab').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+
+            ['stat', 'health', 'savings', 'perks'].forEach(id => {
+                const el = document.getElementById(`content-${id}`);
+                if (id === tabId) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+
+            if (tabId === 'health') updateHealthMilestones();
+            if (tabId === 'savings') updateSavingsAndLoot();
+            if (tabId === 'perks') updatePerks();
+        }
+
+        // Core Calculations & Timers
+        function updateTimers() {
+            const now = new Date();
+            const start = new Date(userData.quitDate);
+            let diffMs = now - start;
+
+            if (diffMs < 0) diffMs = 0; // Future date safety
+
+            const diffSecs = Math.floor(diffMs / 1000);
+            const days = Math.floor(diffSecs / (3600 * 24));
+            const hours = Math.floor((diffSecs % (3600 * 24)) / 3600);
+            const minutes = Math.floor((diffSecs % 3600) / 60);
+            const seconds = diffSecs % 60;
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            // Cigs avoided calculation
+            const cigsPerSec = (userData.cigsPerDay) / (24 * 3600);
+            const avoided = Math.floor(diffSecs * cigsPerSec);
+            document.getElementById('cigs-avoided').textContent = avoided.toLocaleString();
+
+            // Cravings count
+            document.getElementById('cravings-count').textContent = userData.cravingsResisted || 0;
+
+            // Caps Saved
+            const pricePerCig = userData.packPrice / userData.packSize;
+            const capsSaved = (avoided * pricePerCig).toFixed(2);
+            document.getElementById('caps-saved').textContent = capsSaved;
+        }
+
+        // Log Craving Button
+        function logCraving() {
+            userData.cravingsResisted = (userData.cravingsResisted || 0) + 1;
+            saveUserData();
+            playRetroSound('reward');
+            updateTimers();
+        }
+
+        // Health Milestones Data & Logic
+        const milestones = [
+            { id: 1, name: "Pressione & Pulsazioni Normali", durationHours: 0.33, desc: "Pressione sanguigna e battito cardiaco tornano a livelli normali." },
+            { id: 2, name: "Monossido di Carbonio Eliminato", durationHours: 12, desc: "Il livello di monossido di carbonio nel sangue scende a livelli standard." },
+            { id: 3, name: "Nicotina Eliminata (Decontaminazione)", durationHours: 72, desc: "I recettori cerebrali iniziano a resettarsi. Il corpo è privo di nicotina." },
+            { id: 4, name: "Gusto & Olfatto Ripristinati", durationHours: 48, desc: "Le terminazioni nervose gustative ed olfattive ricominciano a crescere." },
+            { id: 5, name: "Capacità Polmonare (+10%)", durationHours: 24 * 30, desc: "Cessano respiro affannoso e tosse. La capacità polmonare aumenta nettamente." },
+            { id: 6, name: "Rischio Cardiaco DIMEZZATO", durationHours: 24 * 365, desc: "Il rischio di coronaropatia si dimezza rispetto a quello di un fumatore." }
+        ];
+
+        function updateHealthMilestones() {
+            const container = document.getElementById('health-milestones-list');
+            container.innerHTML = '';
+
+            const now = new Date();
+            const start = new Date(userData.quitDate);
+            const hoursPassed = Math.max(0, (now - start) / (1000 * 3600));
+
+            milestones.forEach(m => {
+                let pct = Math.min(100, Math.floor((hoursPassed / m.durationHours) * 100));
+                if (isNaN(pct)) pct = 0;
+
+                const isComplete = pct >= 100;
+
+                const card = document.createElement('div');
+                card.className = `border p-3 rounded bg-emerald-950/20 ${isComplete ? 'border-emerald-500' : 'border-emerald-500/40 opacity-80'}`;
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-1 text-xs sm:text-sm">
+                        <span class="font-bold uppercase ${isComplete ? 'pip-glow text-emerald-300' : ''}">
+                            ${isComplete ? '<i class="fa-solid fa-check-circle text-emerald-400"></i>' : '<i class="fa-solid fa-spinner animate-spin"></i>'} ${m.name}
+                        </span>
+                        <span class="font-mono font-bold">${pct}%</span>
+                    </div>
+                    <div class="w-full bg-emerald-950 border border-emerald-500/50 rounded-full h-3 p-0.5 mb-1">
+                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+                    </div>
+                    <p class="text-[11px] text-emerald-400/70">${m.desc}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Savings & Loot Unlocked
+        const lootTable = [
+            { name: "Nuka-Cola (Caffè / Snack Premium)", cost: 3.50, icon: "fa-bottle-droplet" },
+            { name: "Rivista Fumetto Grognak (Libro / Manga)", cost: 15.00, icon: "fa-book-open" },
+            { name: "Fucile Laser (Abbonamento Palestra / Gioco)", cost: 60.00, icon: "fa-gamepad" },
+            { name: "Armatura Potenziata T-45 (Giacca di Marca)", cost: 180.00, icon: "fa-shield-cat" },
+            { name: "Vacanze nel Vault 76 (Weekend Fuori Porta)", cost: 500.00, icon: "fa-plane-departure" }
+        ];
+
+        function updateSavingsAndLoot() {
+            const container = document.getElementById('loot-list');
+            container.innerHTML = '';
+
+            const now = new Date();
+            const start = new Date(userData.quitDate);
+            const diffSecs = Math.max(0, (now - start) / 1000);
+            const cigsAvoided = Math.floor(diffSecs * (userData.cigsPerDay / 86400));
+            const totalSaved = cigsAvoided * (userData.packPrice / userData.packSize);
+
+            lootTable.forEach(loot => {
+                const unlocked = totalSaved >= loot.cost;
+
+                const item = document.createElement('div');
+                item.className = `border p-3 rounded flex items-center gap-3 ${unlocked ? 'border-emerald-500 bg-emerald-950/40 pip-glow-box' : 'border-emerald-500/30 opacity-50 bg-black/40'}`;
+
+                item.innerHTML = `
+                    <div class="text-2xl text-emerald-400 p-2 border border-emerald-500/50 rounded bg-emerald-950">
+                        <i class="fa-solid ${loot.icon}"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-xs sm:text-sm font-bold uppercase ${unlocked ? 'pip-glow' : ''}">${loot.name}</div>
+                        <div class="text-[11px] text-emerald-400/70">COSTO: ${loot.cost.toFixed(2)} CAPS / €</div>
+                    </div>
+                    <div>
+                        ${unlocked ? 
+                            '<span class="bg-emerald-500 text-black text-[10px] font-bold px-2 py-1 rounded">SBLOCCATO</span>' : 
+                            `<span class="text-[10px] border border-emerald-500/50 px-2 py-1 rounded">MANCANO ${(loot.cost - totalSaved).toFixed(2)}€</span>`}
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Perks List
+        const perksData = [
+            { title: "POLMONI D'ACCIAIO", icon: "fa-lungs", reqDays: 1, desc: "+20 Resistenze ai fumi tossici. Il tuo respiro torna pulito e profondo." },
+            { title: "COLLEZIONISTA DI TAPPI", icon: "fa-coins", reqDays: 7, desc: "Hai accumulato una riserva notevole di tappi da reinvestire nel tuo futuro." },
+            { title: "ALITO FRESCO V.T.", icon: "fa-sparkles", reqDays: 3, desc: "+2 Aumento Carisma nelle conversazioni da vicino con altri sopravvissuti." },
+            { title: "RAD-FREE", icon: "fa-biohazard", reqDays: 14, desc: "Livelli di tossine e catrame nel sangue crollati del 90%." },
+            { title: "AMABILE PARLATORE", icon: "fa-comments", reqDays: 30, desc: "I tuoi livelli di ansia si sono stabilizzati senza bisogno della dose nicotinica." }
+        ];
+
+        function updatePerks() {
+            const container = document.getElementById('perks-grid');
+            container.innerHTML = '';
+
+            const now = new Date();
+            const start = new Date(userData.quitDate);
+            const daysPassed = Math.max(0, (now - start) / (1000 * 3600 * 24));
+
+            perksData.forEach(perk => {
+                const unlocked = daysPassed >= perk.reqDays;
+
+                const card = document.createElement('div');
+                card.className = `border p-3 rounded flex gap-3 items-start ${unlocked ? 'border-emerald-500 bg-emerald-950/30' : 'border-emerald-500/30 opacity-40 bg-black/60'}`;
+
+                card.innerHTML = `
+                    <div class="text-2xl p-2 border border-emerald-500 rounded text-emerald-400 bg-emerald-950">
+                        <i class="fa-solid ${perk.icon}"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-xs sm:text-sm font-bold uppercase ${unlocked ? 'pip-glow' : ''}">${perk.title}</div>
+                        <div class="text-[10px] text-emerald-400/60">REQUISITO: ${perk.reqDays} GIORNI SENZA FUMO</div>
+                        <p class="text-[11px] text-emerald-300/80">${perk.desc}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Modal Controls
+        function openConfigModal() {
+            playRetroSound('click');
+            document.getElementById('cfg-quit-date').value = userData.quitDate;
+            document.getElementById('cfg-cigs-day').value = userData.cigsPerDay;
+            document.getElementById('cfg-pack-price').value = userData.packPrice;
+            document.getElementById('cfg-pack-size').value = userData.packSize;
+
+            document.getElementById('config-modal').classList.remove('hidden');
+        }
+
+        function closeConfigModal() {
+            playRetroSound('click');
+            document.getElementById('config-modal').classList.add('hidden');
+        }
+
+        function saveConfig(e) {
+            e.preventDefault();
+            playRetroSound('beep');
+
+            userData.quitDate = document.getElementById('cfg-quit-date').value;
+            userData.cigsPerDay = parseInt(document.getElementById('cfg-cigs-day').value) || 15;
+            userData.packPrice = parseFloat(document.getElementById('cfg-pack-price').value) || 6.0;
+            userData.packSize = parseInt(document.getElementById('cfg-pack-size').value) || 20;
+
+            saveUserData();
+            closeConfigModal();
+            updateTimers();
+        }
+
+        // Initialization
+        window.onload = function() {
+            loadUserData();
+            updateTimers();
+            setInterval(updateTimers, 1000);
+        };
+    </script>
+</body>
+</html>
